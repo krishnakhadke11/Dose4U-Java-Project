@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 import java.util.*;
 
 public class AddReminder implements ActionListener {
@@ -12,11 +13,13 @@ public class AddReminder implements ActionListener {
     JButton addbutton;
     JTextField medtimefieldhour,medtimefieldminute,medtimefieldsecond;
     JTextField medtextfield;
-
     LinkedList ll1=new LinkedList();
-AddReminder(LinkedList ll1){
+    MyJdbc AddReminder_connect=new MyJdbc();
+    String username;
+AddReminder(LinkedList ll1,String username){
     this.ll1=ll1;
       f =new JFrame();
+      this.username=username;
     JLabel medlabel = new JLabel("Add Medicine Name:");
     medlabel.setBounds(70,150,130,25);
     f.add(medlabel);
@@ -30,10 +33,10 @@ AddReminder(LinkedList ll1){
     f.add(medtime);
 
      medtimefieldhour = new JTextField();
-    medtimefieldhour.setBounds(240, 190, 180, 25);
+    medtimefieldhour.setBounds(240, 190, 50, 25);
     f.add(medtimefieldhour);
-/*
-width of medtimefieldhour is 50
+
+
      medtimefieldminute = new JTextField();
     medtimefieldminute.setBounds(300, 190, 50, 25);
     f.add(medtimefieldminute);
@@ -41,7 +44,7 @@ width of medtimefieldhour is 50
      medtimefieldsecond = new JTextField();
     medtimefieldsecond.setBounds(360, 190, 50, 25);
     f.add(medtimefieldsecond);
- */
+
 
 
      addbutton = new JButton("Add");
@@ -63,12 +66,21 @@ AddReminder(int x)
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==addbutton)
         {
-
-           // ll1.insert(Integer.parseInt(medtimefieldhour.getText()),Integer.parseInt(medtimefieldminute.getText()),Integer.parseInt(medtimefieldsecond.getText()),medtextfield.getText());
+            try {
+                int rs=AddReminder_connect.st.executeUpdate("insert into addreminder values('" + username + "','" +
+                        medtextfield.getText() + "','" + medtimefieldhour.getText() + "')");
+                System.out.println(rs);
+            }catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+                    // ll1.insert(Integer.parseInt(medtimefieldhour.getText()),Integer.parseInt(medtimefieldminute.getText()),Integer.parseInt(medtimefieldsecond.getText()),medtextfield.getText());
+            /*
             ll1.insert(medtimefieldhour.getText(),medtextfield.getText());
             ll1.show();
-         //new Home().setVisible(true);
-            f.setVisible(false);
+            */
+                    //new Home().setVisible(true);
+                    f.setVisible(false);
         }
     }
 
