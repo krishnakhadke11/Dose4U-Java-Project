@@ -3,9 +3,12 @@ package com.Dose4U;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 
-public class ViewReminder extends JFrame {
+public class ViewReminder extends JFrame implements ActionListener {
+
     JTable t1;
     JButton b1,b2;
     String username;
@@ -21,12 +24,14 @@ public class ViewReminder extends JFrame {
         b1=new JButton("Edit data");
         b1.setBounds(270,390,150,30);
         add(b1);
+        b1.addActionListener(this);
 
         b2=new JButton("back");
         b2.setBounds(500,390,150,30);
         add(b2);
+        b2.addActionListener(this);
         try {
-            ResultSet rs = ViewReminder_connect.st.executeQuery("select prescription,time from addreminder where username='"+username+"'");
+            ResultSet rs = ViewReminder_connect.st.executeQuery("select sr_no,medicine,time from reminder where username='"+username+"'");
             t1.setModel(DbUtils.resultSetToTableModel(rs));
 
         }catch (Exception ex)
@@ -34,12 +39,23 @@ public class ViewReminder extends JFrame {
             ex.printStackTrace();
         }
 
-        setTitle("Home");
+        setTitle("View Reminder");
         setBounds(320,100,900,500);
         setLayout(null);
         setVisible(true);
     }
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource()==b1)
+        {
 
+        }
+        else if(e.getSource()==b2)
+        {
+            new Home(username);
+            this.setVisible(false);
+        }
+    }
     public static void main(String[] args) {
         new ViewReminder("admin2");
     }

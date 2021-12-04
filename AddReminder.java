@@ -7,55 +7,66 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.*;
 
-public class AddReminder implements ActionListener {
+public class AddReminder extends JFrame implements ActionListener {
     //static linklist head=null;
     JFrame  f;
+    JLabel l1;
     JButton addbutton;
-    JTextField medtimefieldhour,medtimefieldminute,medtimefieldsecond;
+    JTextField medtimefieldhour,medtimefieldminute,medtimefieldsecond,ampm;
     JTextField medtextfield;
+    String time;
     LinkedList ll1=new LinkedList();
-    MyJdbc AddReminder_connect=new MyJdbc();
     String username;
 AddReminder(LinkedList ll1,String username){
     this.ll1=ll1;
-      f =new JFrame();
       this.username=username;
     JLabel medlabel = new JLabel("Add Medicine Name:");
-    medlabel.setBounds(70,150,130,25);
-    f.add(medlabel);
+    medlabel.setBounds(30,150,130,25);
+    add(medlabel);
 
      medtextfield = new JTextField();
-    medtextfield.setBounds(240, 150, 180, 25);
-    f.add(medtextfield);
+     medtextfield.setBounds(180, 150, 180, 25);
+     add(medtextfield);
 
-    JLabel medtime = new JLabel("Add Time(hh:mm:ss: am/pm):");
-    medtime.setBounds(70,185,160,25);
-    f.add(medtime);
+    JLabel medtime = new JLabel("Add Time:");
+    medtime.setBounds(30,190,160,25);
+    add(medtime);
+
+
 
      medtimefieldhour = new JTextField();
-    medtimefieldhour.setBounds(240, 190, 50, 25);
-    f.add(medtimefieldhour);
+    medtimefieldhour.setBounds(180, 190, 50, 25);
+    add(medtimefieldhour);
 
 
      medtimefieldminute = new JTextField();
-    medtimefieldminute.setBounds(300, 190, 50, 25);
-    f.add(medtimefieldminute);
+    medtimefieldminute.setBounds(240, 190, 50, 25);
+    add(medtimefieldminute);
 
      medtimefieldsecond = new JTextField();
-    medtimefieldsecond.setBounds(360, 190, 50, 25);
-    f.add(medtimefieldsecond);
+    medtimefieldsecond.setBounds(300, 190, 50, 25);
+    add(medtimefieldsecond);
 
+    ampm =new JTextField();
+    ampm.setBounds(360,190,50,25);
+    add(ampm);
 
-
-     addbutton = new JButton("Add");
-    addbutton.setBounds(170,245,80, 20);
-    f.add(addbutton);
+//45
+    addbutton = new JButton("Add");
+    addbutton.setBounds(170,270,80, 20);
+    add(addbutton);
     addbutton.addActionListener(this);
 
-    f.setBounds(550,150,450,400);
-    f.setTitle("Add Reminder");
-    f.setLayout(null);
-    f.setVisible(true);
+    l1 = new JLabel("Please fill all the details");
+    l1.setBounds(135,245,180,25);
+    l1.setForeground(Color.RED);
+    add(l1);
+    l1.setVisible(false);
+
+    setBounds(550,150,450,400);
+    setTitle("Add Reminder");
+    setLayout(null);
+    setVisible(true);
 }
 AddReminder(int x)
 {
@@ -64,12 +75,13 @@ AddReminder(int x)
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==addbutton)
+        time=medtimefieldhour.getText()+":"+medtimefieldminute.getText()+":"+medtimefieldsecond.getText()+" "+ampm.getText().toLowerCase(Locale.ROOT);
+        if(e.getSource()==addbutton && !time.equals("hh:mm:ss am/pm") && !medtextfield.getText().equals(""))
         {
+            MyJdbc AddReminder_connect=new MyJdbc();
             try {
-                int rs=AddReminder_connect.st.executeUpdate("insert into addreminder values('" + username + "','" +
-                        medtextfield.getText() + "','" + medtimefieldhour.getText() + "')");
-                System.out.println(rs);
+                 AddReminder_connect.st.executeUpdate("insert into reminder(username,medicine,time) values('" + username + "','" +
+                        medtextfield.getText() + "','" + time + "')");
             }catch (Exception ex)
             {
                 ex.printStackTrace();
@@ -80,7 +92,12 @@ AddReminder(int x)
             ll1.show();
             */
                     //new Home().setVisible(true);
-                    f.setVisible(false);
+                    this.setVisible(false);
+        }
+        else
+        {
+            System.out.println(time);
+          l1.setVisible(true);
         }
     }
 

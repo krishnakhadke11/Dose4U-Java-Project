@@ -71,7 +71,7 @@ public class Clock extends Thread{
             */
             try{
                 MyJdbc clock_connect=new MyJdbc();
-                ResultSet rs=clock_connect.st.executeQuery("select * from addreminder where username='"+this.username+"'");
+                ResultSet rs=clock_connect.st.executeQuery("select * from reminder where username='"+this.username+"'");
                 while (rs.next())
                 {
                  String dbtime=rs.getString("time");
@@ -79,7 +79,7 @@ public class Clock extends Thread{
                  {
                      Toolkit.getDefaultToolkit().beep();
                      System.out.println("In if statement");
-                     JOptionPane.showMessageDialog(null, "Hey time to take:"+rs.getString("prescription"));
+                     JOptionPane.showMessageDialog(null, "Hey time to take:"+rs.getString("medicine"));
                  }
                 }
             }catch (Exception e)

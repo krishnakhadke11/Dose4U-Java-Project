@@ -72,32 +72,7 @@ public class Login implements ActionListener {
         {
             String userid=t1.getText();
             String password=t2.getText();
-            /*
-            Connection conn;
-            Statement st;
 
-                try{
-                    Class.forName("com.mysql.cj.jdbc.Driver");
-                    conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/dose4u","root","Rootmysql");
-                    st=conn.createStatement();
-                    ResultSet rs=st.executeQuery("select * from login where username='"+userid+"' and password='"+password+"'");
-                    if(rs.next())
-                    {
-                        new Home().setVisible(true);
-                        f.setVisible(false);
-                    }
-                    else
-                    {
-                        l3.setVisible(true);
-                        // JOptionPane.showMessageDialog(b1,"Invalid Username or password");
-                    }
-                    st.close();
-                    conn.close();
-                }catch (Exception ae)
-                {
-                    ae.printStackTrace();
-                }
-           */
 
             MyJdbc login_connect=new MyJdbc();
             try {
@@ -117,20 +92,14 @@ public class Login implements ActionListener {
             } catch (Exception ae) {
                 ae.printStackTrace();
             }
-
-
         }
-/*
-        if(e.getSource()==b1 && t1.getText().equals(userid) && t2.getText().equals(password)){
-
-            new Home().setVisible(true);
+        else if(e.getSource()==b2)
+        {
+            new SignUp();
             f.setVisible(false);
         }
-        else{
-           l3.setVisible(true);
-           // JOptionPane.showMessageDialog(b1,"Invalid Username or password");
-        }
- */
+
+
     }
 
     public static void main(String[] args) {

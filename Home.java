@@ -31,6 +31,7 @@ public class Home extends JFrame implements ActionListener{
         b4= new JButton("Logout");
         b4.setBounds(20,260,150,30);
         add(b4);
+        b4.addActionListener(this);
 
         Time = new JLabel("");
         Time.setBounds(450,50,100,25);
@@ -58,6 +59,12 @@ public class Home extends JFrame implements ActionListener{
         else if(e.getSource()==b3)
         {
             new ViewReminder(username);
+            this.setVisible(false);
+        }
+        else if(e.getSource()==b4)
+        {
+            new Login();
+            this.setVisible(false);
         }
     }
 
