@@ -11,14 +11,12 @@ public class AddReminder extends JFrame implements ActionListener {
     //static linklist head=null;
     JFrame  f;
     JLabel l1;
-    JButton addbutton;
-    JTextField medtimefieldhour,medtimefieldminute,medtimefieldsecond,ampm;
-    JTextField medtextfield;
+    JButton addbutton,backbutton;
+    JTextField medtimefieldhour,medtimefieldminute,medtimefieldsecond, medtextfield;
+    JComboBox <String> ampm;
     String time;
-    LinkedList ll1=new LinkedList();
     String username;
-AddReminder(LinkedList ll1,String username){
-    this.ll1=ll1;
+AddReminder(String username){
       this.username=username;
     JLabel medlabel = new JLabel("Add Medicine Name:");
     medlabel.setBounds(30,150,130,25);
@@ -31,7 +29,6 @@ AddReminder(LinkedList ll1,String username){
     JLabel medtime = new JLabel("Add Time:");
     medtime.setBounds(30,190,160,25);
     add(medtime);
-
 
 
      medtimefieldhour = new JTextField();
@@ -47,15 +44,23 @@ AddReminder(LinkedList ll1,String username){
     medtimefieldsecond.setBounds(300, 190, 50, 25);
     add(medtimefieldsecond);
 
-    ampm =new JTextField();
-    ampm.setBounds(360,190,50,25);
+    String[] ap = {"am", "pm"};
+    ampm = new JComboBox<>(ap);
+    ampm.setBounds(360, 190, 50, 25);
     add(ampm);
 
-//45
+
     addbutton = new JButton("Add");
-    addbutton.setBounds(170,270,80, 20);
-    add(addbutton);
+    addbutton.setBounds(170,245,80, 20);
     addbutton.addActionListener(this);
+    add(addbutton);
+
+
+    backbutton = new JButton("Back");
+    backbutton.setBounds(300,245,80, 20);
+    backbutton.addActionListener(this);
+    add(backbutton);
+
 
     l1 = new JLabel("Please fill all the details");
     l1.setBounds(135,245,180,25);
@@ -75,8 +80,8 @@ AddReminder(int x)
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        time=medtimefieldhour.getText()+":"+medtimefieldminute.getText()+":"+medtimefieldsecond.getText()+" "+ampm.getText().toLowerCase(Locale.ROOT);
-        if(e.getSource()==addbutton && !time.equals("hh:mm:ss am/pm") && !medtextfield.getText().equals(""))
+        time=medtimefieldhour.getText()+":"+medtimefieldminute.getText()+":"+medtimefieldsecond.getText()+" "+ampm.getSelectedItem();
+        if(e.getSource()==addbutton && !time.equals("") && !medtextfield.getText().equals(""))
         {
             MyJdbc AddReminder_connect=new MyJdbc();
             try {
@@ -86,18 +91,19 @@ AddReminder(int x)
             {
                 ex.printStackTrace();
             }
-                    // ll1.insert(Integer.parseInt(medtimefieldhour.getText()),Integer.parseInt(medtimefieldminute.getText()),Integer.parseInt(medtimefieldsecond.getText()),medtextfield.getText());
-            /*
-            ll1.insert(medtimefieldhour.getText(),medtextfield.getText());
-            ll1.show();
-            */
-                    //new Home().setVisible(true);
+
+                    new Home(username).setVisible(true);
                     this.setVisible(false);
+        }
+        else if (e.getSource()==backbutton)
+        {
+            new Home(username);
+            this.setVisible(false);
         }
         else
         {
             System.out.println(time);
-          l1.setVisible(true);
+            l1.setVisible(true);
         }
     }
 

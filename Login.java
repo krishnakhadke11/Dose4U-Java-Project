@@ -7,13 +7,12 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 
 public class Login implements ActionListener {
-    JFrame f;
-    JLabel l3;
-    JButton b1,b2;
-    JTextField t1;
-    JPasswordField t2;
-    //String userid="admin";
-   // String password="admin";
+    private JFrame f;
+    private JLabel l3;
+    private JButton b1,b2;
+    private JTextField t1;
+    private JPasswordField t2;
+
 
     Login(){
         f = new JFrame("Dose4U");
@@ -79,7 +78,8 @@ public class Login implements ActionListener {
                 ResultSet rs=login_connect.st.executeQuery("select * from login where username='"+userid+"' and password='"+password+"'");
                 if (rs.next())
                 {
-                    new Home(userid);
+                   Home home= new Home(userid);
+                  home.clock();
                     f.setVisible(false);
                 }
                 else

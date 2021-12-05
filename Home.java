@@ -7,15 +7,16 @@ import java.awt.event.ActionListener;
 
 public class Home extends JFrame implements ActionListener{
     static JLabel Time;
-    JButton b2,b3,b4;
+    JButton b1,b2,b3,b4;
     String username;
-    LinkedList ll1=new LinkedList();
+
     Home(String username){
         this.username=username;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        JButton b1= new JButton("Add Patients Record");
+        b1= new JButton("View/Edit Reminder");
         b1.setBounds(20,50,150,30);
+        b1.addActionListener(this);
         add(b1);
 
         b2= new JButton("Add Reminder");
@@ -23,7 +24,7 @@ public class Home extends JFrame implements ActionListener{
         add(b2);
         b2.addActionListener( this);
 
-        b3= new JButton("View Reminder");
+        b3= new JButton("Edit Profile");
         b3.setBounds(20,190,150,30);
         add(b3);
         b3.addActionListener(this);
@@ -37,8 +38,6 @@ public class Home extends JFrame implements ActionListener{
         Time.setBounds(450,50,100,25);
         add(Time);
 
-        Clock clc=new Clock(ll1,username);
-        clc.start();
 
         setTitle("Home");
         setBounds(320,100,900,500);
@@ -46,20 +45,32 @@ public class Home extends JFrame implements ActionListener{
         setVisible(true);
 
     }
+
+    void clock()
+    {
+        Clock clc=new Clock(username);
+        clc.start();
+    }
      Home(int i) {
     }
 
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==b2)
-        {
-            new AddReminder(ll1,username);
-            //this.setVisible(false);
-        }
-        else if(e.getSource()==b3)
+        if(e.getSource()==b1)
         {
             new ViewReminder(username);
             this.setVisible(false);
+        }
+        if (e.getSource()==b2)
+        {
+            new AddReminder(username);
+            this.setVisible(false);
+        }
+        else if(e.getSource()==b3)
+        {
+
         }
         else if(e.getSource()==b4)
         {
@@ -69,6 +80,8 @@ public class Home extends JFrame implements ActionListener{
     }
 
     public static void main(String[] args) {
-        new Home("admin2");
+       // Home home=new Home("admin2");
+        //home.clock();
+
     }
 }

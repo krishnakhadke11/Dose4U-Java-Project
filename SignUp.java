@@ -64,8 +64,8 @@ class SignUp extends JFrame implements ActionListener
 
         tmno = new JTextField(null);
         tmno.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-        tmno.setSize(200, 20);
-        tmno.setLocation(250, 140);
+        tmno.setSize(250, 20);
+        tmno.setLocation(200, 140);
         c.add(tmno);
 
         JLabel dob = new JLabel("Date of Birth");
