@@ -1,6 +1,7 @@
 package com.Dose4U;
 import java.awt.event.*;
 import java.awt.*;
+import java.sql.ResultSet;
 import javax.swing.*;
 
 class SignUp extends JFrame implements ActionListener
@@ -16,7 +17,7 @@ class SignUp extends JFrame implements ActionListener
     private final JComboBox<String> year;
     private final JTextField tadd;
     private final JCheckBox term;
-    private final JButton sub;
+    private final JButton sub,back;
     private final JButton reset;
     private final JLabel res;
 
@@ -28,31 +29,31 @@ class SignUp extends JFrame implements ActionListener
         setResizable(false);
 
         Container c = getContentPane();
-        c.setBackground(Color.lightGray);
+        c.setBackground(Color.pink);
         c.setLayout(null);
 
-        JLabel title = new JLabel("NEW PATIENT RECORD");
+        JLabel title = new JLabel("SIGN UP");
         title.setFont(new Font("Times New Roman", Font.BOLD, 30));
         title.setSize(600, 40);
-        title.setLocation(300, 30);
+        title.setLocation(400, 30);
         c.add(title);
 
-        JLabel name = new JLabel("Name");
+        JLabel name = new JLabel("Name :");
         name.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         name.setSize(100, 20);
-        name.setLocation(100, 100);
+        name.setLocation(50, 100);
         c.add(name);
 
         fname = new JTextField("");
         fname.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        fname.setSize(250, 20);
-        fname.setLocation(200, 100);
+        fname.setSize(285, 20);
+        fname.setLocation(150, 100);
         c.add(fname);
 
-        JLabel mno = new JLabel("Mobile");
+        JLabel mno = new JLabel("Mobile :");
         mno.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         mno.setSize(100, 20);
-        mno.setLocation(100, 140);
+        mno.setLocation(50, 140);
         c.add(mno);
 /*
         std = new JTextField();
@@ -62,16 +63,16 @@ class SignUp extends JFrame implements ActionListener
         c.add(std);
  */
 
-        tmno = new JTextField(null);
+        tmno = new JTextField("");
         tmno.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-        tmno.setSize(250, 20);
-        tmno.setLocation(200, 140);
+        tmno.setSize(285, 20);
+        tmno.setLocation(150, 140);
         c.add(tmno);
 
-        JLabel dob = new JLabel("Date of Birth");
+        JLabel dob = new JLabel("Date of Birth :");
         dob.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         dob.setSize(150, 20);
-        dob.setLocation(70, 180);
+        dob.setLocation(20, 180);
         c.add(dob);
 
         String[] dates = {"1", "2", "3", "4", "5",
@@ -84,7 +85,7 @@ class SignUp extends JFrame implements ActionListener
         date = new JComboBox<>(dates);
         date.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         date.setSize(75, 20);
-        date.setLocation(200, 180);
+        date.setLocation(150, 180);
         c.add(date);
 
         String[] months = {"January", "February", "March", "April",
@@ -94,7 +95,7 @@ class SignUp extends JFrame implements ActionListener
         month = new JComboBox<>(months);
         month.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         month.setSize(120, 20);
-        month.setLocation(280, 180);
+        month.setLocation(230, 180);
         c.add(month);
 
         String[] years = {"1947","1948","1949","1950","1951", "1952", "1953", "1954","1955",
@@ -107,64 +108,71 @@ class SignUp extends JFrame implements ActionListener
         year = new JComboBox<>(years);
         year.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         year.setSize(90, 20);
-        year.setLocation(400, 180);
+        year.setLocation(350, 180);
         c.add(year);
 
-        JLabel add = new JLabel("City");
+        JLabel add = new JLabel("City :");
         add.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         add.setSize(100, 20);
-        add.setLocation(100, 220);
+        add.setLocation(50, 220);
         c.add(add);
 
         tadd = new JTextField();
         tadd.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-        tadd.setSize(250, 20);
-        tadd.setLocation(200, 220);
+        tadd.setSize(285, 20);
+        tadd.setLocation(150, 220);
         c.add(tadd);
 
-        JLabel Email = new JLabel("E-mail");
+        JLabel Email = new JLabel("E-mail :");
         Email.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         Email.setSize(100, 20);
-        Email.setLocation(100, 260);
+        Email.setLocation(50, 260);
         c.add(Email);
 
         mail = new JTextField("user@example.com");
         mail.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-        mail.setSize(250, 20);
-        mail.setLocation(200, 260);
+        mail.setSize(285, 20);
+        mail.setLocation(150, 260);
         c.add(mail);
 
         term = new JCheckBox("I have filled all the details.");
-        term.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+        term.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         term.setSize(400, 20);
-        term.setLocation(85, 300);
+        term.setLocation(50, 340);
         c.add(term);
 
         sub = new JButton("Sign up");
         sub.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         sub.setSize(100, 20);
-        sub.setLocation(100, 340);
+        sub.setLocation(150, 410);
         sub.addActionListener(this);
         c.add(sub);
 
         reset = new JButton("Reset");
         reset.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         reset.setSize(100, 20);
-        reset.setLocation(270, 340);
+        reset.setLocation(400, 410);
         reset.addActionListener(this);
         c.add(reset);
 
+        back = new JButton("Back");
+        back.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        back.setSize(100, 20);
+        back.setLocation(650, 410);
+        back.addActionListener(this);
+        c.add(back);
 
 
         res = new JLabel("");
-        res.setFont(new Font("Times New Roman", Font.BOLD, 20));
+        res.setFont(new Font("Times New Roman", Font.BOLD, 24));
         res.setSize(500, 25);
-        res.setLocation(100, 380);
+        res.setLocation(500, 260);
+        res.setForeground(Color.RED);
         c.add(res);
 
 
 
-        JLabel user = new JLabel("Username");
+        JLabel user = new JLabel("Username :");
         user.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         user.setSize(100, 25);
         user.setLocation(500, 100);
@@ -176,7 +184,8 @@ class SignUp extends JFrame implements ActionListener
         user_name.setLocation(600, 100);
         c.add(user_name);
 
-        JLabel pass = new JLabel("Password");
+
+        JLabel pass = new JLabel("Password :");
         pass.setFont(new Font("Times New Roman", Font.PLAIN, 20));
         pass.setSize(100, 25);
         pass.setLocation(500, 140);
@@ -194,10 +203,50 @@ class SignUp extends JFrame implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
+        MyJdbc signup_connect = new MyJdbc();
         if (e.getSource() == sub)
         {
+            try {
+                ResultSet rs=signup_connect.st.executeQuery("select username from login where username='"+user_name.getText()+"'");
+                if (term.isSelected() && !fname.getText().equals("") &&!tmno.getText().equals("") && !mail.getText().equals("") && !tadd.getText().equals("") && !user_name.getText().equals("") && !password.getText().equals(""))
+                {
+                    if(!rs.next()) {
+                        res.setText("Registration Successful.");
+                        String name = fname.getText();
+                        String phone = tmno.getText();
+                        String username = user_name.getText();
+                        String password1 = password.getText();
+                        String dob = date.getSelectedItem() + " " + month.getSelectedItem() + " " + year.getSelectedItem();
+                        String city = tadd.getText();
+                        String email = mail.getText();
+
+
+                        String input = "insert into login values ('" + username + "','" + password1 + "','" + name + "','" + dob + "','" + email + "','" + city + "','" + phone + "')";
+
+                        signup_connect.st.executeUpdate(input);
+                        JOptionPane.showMessageDialog(null, "You Signed Up Succesfully");
+                        this.setVisible(false);
+                        new Login();
+                        signup_connect.conn.close();
+                        signup_connect.st.close();
+                    }
+                    else {
+                        res.setText("This username has already been taken!");
+                    }
+
+
+                }
+                else {
+                    res.setText("Please enter all details!");
+                }
+            }catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
+         /*
             if (term.isSelected() && !fname.getText().equals("") &&!tmno.getText().equals("") && !mail.getText().equals("") && !tadd.getText().equals("") && !user_name.getText().equals("") && !password.getText().equals(""))
             {
+                if()
                 res.setText("Registration Successful.");
                 String name = fname.getText();
                 String phone = tmno.getText();
@@ -207,7 +256,7 @@ class SignUp extends JFrame implements ActionListener
                 String city = tadd.getText();
                 String email = mail.getText();
 
-                MyJdbc signup_connect = new MyJdbc();
+
                 String input = "insert into login values ('"+username+"','"+password1+"','"+name+"','"+dob+"','"+email+"','"+city+"','"+phone+"')";
                 try{
                     signup_connect.st.executeUpdate(input);
@@ -224,6 +273,7 @@ class SignUp extends JFrame implements ActionListener
             else {
                 res.setText("Please enter all details!");
             }
+            */
         }
         else if (e.getSource() == reset) {
             String def = "";
@@ -240,6 +290,11 @@ class SignUp extends JFrame implements ActionListener
             year.setSelectedIndex(0);
             user_name.setText(def);
             password.setText(def);
+        }
+        else if (e.getSource()== back)
+        {
+            this.setVisible(false);
+            new Login();
         }
     }
 

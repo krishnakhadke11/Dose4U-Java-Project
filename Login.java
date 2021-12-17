@@ -8,7 +8,7 @@ import java.sql.*;
 
 public class Login implements ActionListener {
     private JFrame f;
-    private JLabel l3;
+    private JLabel l3,l4;
     private JButton b1,b2;
     private JTextField t1;
     private JPasswordField t2;
@@ -17,45 +17,65 @@ public class Login implements ActionListener {
     Login(){
         f = new JFrame("Dose4U");
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        /*
-        ImageIcon logo = new ImageIcon(ClassLoader.getSystemResource("logo4.jpeg"));
-        //Krishna
-        Image logo1=logo.getImage().getScaledInstance();
-        ImageIcon logo2=new ImageIcon(logo1)
-        JLabel image = new JLabel(logo2);
-        image.setBounds(130, 20,120,120);
-        f.add(image);
-        */
+        Container c = f.getContentPane();
+        c.setBackground(Color.WHITE);
+        c.setLayout(null);
 
-        JLabel l1 = new JLabel("Username");
-        l1.setBounds(100,150,80,25);
-        f.add(l1);
+        ImageIcon logo = new ImageIcon(ClassLoader.getSystemResource("com/Dose4U/LogoDose4u.jpeg"));
+        Image logo2  = logo.getImage().getScaledInstance(250,250,Image.SCALE_DEFAULT);
+        ImageIcon final_logo = new ImageIcon(logo2);
+        JLabel image = new JLabel(final_logo);
+        image.setBounds(350, 10,500,450);
+        f.add(image);
+
+
+        JLabel title = new JLabel("DOSE4U : Medicine Reminders");
+        title.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        title.setSize(600, 40);
+        title.setLocation(250, 40);
+        c.add(title);
+
+        JLabel l1 = new JLabel("Username :");
+        l1.setBounds(100,150,180,25);
+        l1.setFont(new Font("Times New Roman", Font.BOLD,20 ));
+        c.add(l1);
 
          t1 = new JTextField();
         t1.setBounds(100, 180, 180, 25);
-        f.add(t1);
+        c.add(t1);
 
-        JLabel l2 = new JLabel("Password");
-        l2.setBounds(100,220,80,25);
-        f.add(l2);
+        JLabel l2 = new JLabel("Password : ");
+        l2.setBounds(100,220,180,25);
+        l2.setFont(new Font("Times New Roman", Font.BOLD,20 ));
+        c.add(l2);
 
         t2 = new JPasswordField();
         t2.setBounds(100, 250, 180, 25);
-        f.add(t2);
+        c.add(t2);
 
-        l3 = new JLabel("Invalid Username or password");
-        l3.setBounds(100,270,180,25);
+        l3 = new JLabel("Invalid Username or password ! ");
+        l3.setBounds(95,350,210,25);
+        l3.setFont(new Font("Times New Roman", Font.PLAIN, 15));
         l3.setForeground(Color.RED);
-        f.add(l3);
+        c.add(l3);
         l3.setVisible(false);
 
-        b1 = new JButton("LogIn");
-        b1.setBounds(100,300,80, 20);
-        f.add(b1);
+        l4 = new JLabel("Fields cannot be empty ! ");
+        l4.setBounds(100,350,210,25);
+        l4.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        l4.setForeground(Color.RED);
+        c.add(l4);
+        l4.setVisible(false);
 
-         b2 = new JButton("SignUp");
+        b1 = new JButton("Login");
+        b1.setBounds(100,300,80, 20);
+        b1.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        c.add(b1);
+
+        b2 = new JButton("Sign Up");
         b2.setBounds(200,300,80, 20);
-        f.add(b2);
+        b2.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+        c.add(b2);
 
         b1.addActionListener(this);
         b2.addActionListener(this);
@@ -71,19 +91,23 @@ public class Login implements ActionListener {
         {
             String userid=t1.getText();
             String password=t2.getText();
-
-
             MyJdbc login_connect=new MyJdbc();
             try {
                 ResultSet rs=login_connect.st.executeQuery("select * from login where username='"+userid+"' and password='"+password+"'");
                 if (rs.next())
                 {
                    Home home= new Home(userid);
-                  home.clock();
-                    f.setVisible(false);
+                   home.clock();
+                   f.setVisible(false);
+                }
+                else if (t1.getText().equals("") || t2.getText().equals(""))
+                {
+                    l4.setVisible(true);
+                    l3.setVisible(false);
                 }
                 else
                 {
+                    l4.setVisible(false);
                     l3.setVisible(true);
                     // JOptionPane.showMessageDialog(b1,"Invalid Username or password");
                 }
