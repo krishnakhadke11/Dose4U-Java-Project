@@ -19,82 +19,103 @@ public class EditReminder extends JFrame implements ActionListener{
     EditReminder(String userid){
         this.username = userid;
 
+        Container c = getContentPane();
+        c.setBackground(Color.pink);
+        c.setLayout(null);
+
+        JLabel title = new JLabel("EDIT REMINDERS");
+        title.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        title.setSize(290, 40);
+        title.setLocation(305, 20);
+        c.add(title);
+
         table = new JTable();
-        table.setBounds(50, 50, 590, 280);
-        add(table);
+        table.setBounds(60, 110, 590, 250);
+        table.setBackground(Color.lightGray);
+        c.add(table);
 
 //        sp = new JScrollPane(table);
 //        sp.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //        add(sp);
 
+
         l1_sr = new JLabel("Sr. No.");
-        l1_sr.setBounds(60, 390, 60, 20);
-        add(l1_sr);
+        l1_sr.setBounds(60, 410, 60, 20);
+        l1_sr.setFont(new Font("Times New Roman", Font.BOLD, 15));
+        c.add(l1_sr);
+
 
         l2_med = new JLabel("Medicine");
-        l2_med.setBounds(290, 390, 60, 20);
-        add(l2_med);
+        l2_med.setBounds(290, 410, 60, 20);
+        l2_med.setFont(new Font("Times New Roman", Font.BOLD, 15));
+        c.add(l2_med);
 
         l3_time = new JLabel("Time");
-        l3_time.setBounds(530, 390, 60, 20);
-        add(l3_time);
+        l3_time.setBounds(530, 410, 60, 20);
+        l3_time.setFont(new Font("Times New Roman", Font.BOLD, 15));
+        c.add(l3_time);
+
 
         topl1_sr = new JLabel("Sr. No.");
-        topl1_sr.setBounds(130, 30, 60, 20);
-        add(topl1_sr);
+        topl1_sr.setBounds(65, 80, 60, 20);
+        topl1_sr.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        c.add(topl1_sr);
 
         topl2_med = new JLabel("Medicine");
-        topl2_med.setBounds(320, 30, 60, 20);
-        add(topl2_med);
+        topl2_med.setBounds(260, 80, 100, 20);
+        topl2_med.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        c.add(topl2_med);
 
         topl3_time = new JLabel("Time");
-        topl3_time.setBounds(530, 30, 60, 20);
-        add(topl3_time);
+        topl3_time.setBounds(460, 80, 60, 20);
+        topl3_time.setFont(new Font("Times New Roman", Font.PLAIN, 20));
+        c.add(topl3_time);
 
         tf1_sr = new JTextField();
-        tf1_sr.setBounds(60, 360, 40, 25);
-        add(tf1_sr);
+        tf1_sr.setBounds(60, 380, 40, 25);
+        c.add(tf1_sr);
 
         tf2_med = new JTextField();
-        tf2_med.setBounds(220, 360, 200, 25);
-        add(tf2_med);
+        tf2_med.setBounds(220, 380, 200, 25);
+        c.add(tf2_med);
 
         medtimefieldhour = new JTextField();
-        medtimefieldhour.setBounds(455, 360, 40, 25);
-        add(medtimefieldhour);
+        medtimefieldhour.setBounds(455, 380, 40, 25);
+        c.add(medtimefieldhour);
 
         medtimefieldminute = new JTextField();
-        medtimefieldminute.setBounds(500, 360, 40, 25);
-        add(medtimefieldminute);
+        medtimefieldminute.setBounds(500, 380, 40, 25);
+        c.add(medtimefieldminute);
 
         medtimefieldsecond = new JTextField();
-        medtimefieldsecond.setBounds(545, 360, 40, 25);
-        add(medtimefieldsecond);
+        medtimefieldsecond.setBounds(545, 380, 40, 25);
+        c.add(medtimefieldsecond);
+
 
         String[] ap = {"am", "pm"};
         ampm = new JComboBox<>(ap);
-        ampm.setBounds(590, 360, 50, 25);
-        add(ampm);
+        ampm.setBounds(590, 380, 70, 25);
+        c.add(ampm);
 
         b1_search = new JButton("Search");
-        b1_search.setBounds(110, 360, 80, 25);
+        b1_search.setBounds(120, 380, 80, 25);
         b1_search.addActionListener(this);
-        add(b1_search);
+        c.add(b1_search);
 
         b2_update = new JButton("Update");
-        b2_update.setBounds(200, 450, 100, 25);
+        b2_update.setBounds(725, 154, 100, 25);
         b2_update.addActionListener(this);
-        add(b2_update);
+        c.add(b2_update);
 
         b3_delete = new JButton("Delete");
-        b3_delete.setBounds(320, 450, 100, 25);
+        b3_delete.setBounds(725, 223, 100, 25);
         b3_delete.addActionListener(this);
-        add(b3_delete);
+        c.add(b3_delete);
 
-        b4_cancel = new JButton("Cancel");
-        b4_cancel.setBounds(440, 450, 100, 25);
+        b4_cancel = new JButton("Back");
+        b4_cancel.setBounds(725, 292, 100, 25);
         b4_cancel.addActionListener(this);
-        add(b4_cancel);
+        c.add(b4_cancel);
 
         MyJdbc edit_connect = new MyJdbc();
         String input = "select sr_no, medicine, time from reminder where username = '" +username+ "'";
@@ -108,8 +129,8 @@ public class EditReminder extends JFrame implements ActionListener{
             e.printStackTrace();
         }
 
-        this.setBounds(415,100,700,550);
-        this.setTitle("Edit Reminder");
+        this.setBounds(320,100,900,500);
+        this.setTitle("Dose4U");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
         this.setVisible(true);
@@ -117,35 +138,40 @@ public class EditReminder extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         int num;
-        if(e.getSource()==b1_search){
-            num = Integer.parseInt(tf1_sr.getText());
-            MyJdbc search_connect = new MyJdbc();
-            String input = "select * from reminder where sr_no = " + num;
-            try{
-                ResultSet rs = search_connect.st.executeQuery(input);
-                while (rs.next()){
-                    int sr = rs.getInt("sr_no");
-                    if(num == sr) {
-                        String med = rs.getString("medicine");
-                        String time = rs.getString("time");
-                        String hr = time.substring(0,2);
-                        String min = time.substring(3,5);
-                        String sec = time.substring(6,8);
-                        String ap = time.substring(9,11);
-                        tf2_med.setText(med);
-                        medtimefieldhour.setText(hr);
-                        medtimefieldminute.setText(min);
-                        medtimefieldsecond.setText(sec);
-                        ampm.setSelectedItem(ap);
+        if(e.getSource()==b1_search) {
+            if (!tf1_sr.getText().isEmpty()) {
+                num = Integer.parseInt(tf1_sr.getText());
+                MyJdbc search_connect = new MyJdbc();
+                String input = "select * from reminder where sr_no = " + num + " and username = '" + username + "'";
+                try {
+                    ResultSet rs = search_connect.st.executeQuery(input);
+                    while (rs.next()) {
+                        int sr = rs.getInt("sr_no");
+                        if (num == sr) {
+                            String med = rs.getString("medicine");
+                            String time = rs.getString("time");
+                            String hr = time.substring(0, 2);
+                            String min = time.substring(3, 5);
+                            String sec = time.substring(6, 8);
+                            String ap = time.substring(9, 11);
+                            tf2_med.setText(med);
+                            medtimefieldhour.setText(hr);
+                            medtimefieldminute.setText(min);
+                            medtimefieldsecond.setText(sec);
+                            ampm.setSelectedItem(ap);
+                        }
                     }
+                    search_connect.st.close();
+                    search_connect.conn.close();
+                } catch (Exception ee) {
+                    System.out.println(ee);
                 }
-                search_connect.st.close();
-                search_connect.conn.close();
+                flag = 1;
             }
-            catch(Exception ee){
-                System.out.println(ee);
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Please Select a Reminder to Edit");
             }
-            flag = 1;
         }
 
         if(e.getSource()==b2_update){
