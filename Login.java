@@ -18,23 +18,29 @@ public class Login implements ActionListener {
         f = new JFrame("Dose4U");
         f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         Container c = f.getContentPane();
+
         c.setBackground(Color.PINK);
         c.setLayout(null);
+        
 
         ImageIcon logo = new ImageIcon(ClassLoader.getSystemResource("com/Dose4U/LogoDose4u.jpeg"));
-        Image logo2  = logo.getImage().getScaledInstance(300,300,Image.SCALE_DEFAULT);
+        Image logo2  = logo.getImage().getScaledInstance(250,250,Image.SCALE_DEFAULT);
         ImageIcon final_logo = new ImageIcon(logo2);
         JLabel image = new JLabel(final_logo);
         image.setBounds(350, 10,500,450);
         f.add(image);
 
+
         /*
+
         JLabel title = new JLabel("DOSE4U : Medicine Reminders");
         title.setFont(new Font("Times New Roman", Font.BOLD, 30));
         title.setSize(600, 40);
         title.setLocation(250, 40);
         c.add(title);
+
          */
+
 
         JLabel l1 = new JLabel("Username :");
         l1.setBounds(100,150,180,25);
