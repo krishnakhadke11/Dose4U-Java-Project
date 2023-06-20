@@ -29,7 +29,8 @@ Dr. Arun Kulkarni, HOD(IT Dept), TSEC, is our guide for the same.
 ## -Edit Reminder
 ![Edit-Reminder](https://user-images.githubusercontent.com/95179120/158032183-469ad464-97ae-4a82-be3d-3dbed94fb4c3.jpeg)
 ## -Edit Profile
-![Edit-Profile](https://user-images.githubusercontent.com/95179120/158032191-4fd04dd8-4457-49d5-9ce4-ad58676d6f3d.jpeg)
+![image](https://github.com/krishnakhadke11/Dose4U-Java-Project/assets/95179120/b0fe1be3-46f4-4868-a5ee-3e6cd6d4ba93)
+
 
 
 
